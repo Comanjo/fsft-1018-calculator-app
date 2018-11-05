@@ -59,22 +59,22 @@ class App extends Component {
   
   handleSubmit = async (e) => {
     e.preventDefault()
+    const { numbers, operation } = this.state
+    
     const response = await fetch(`https://calculator-api-uwxhfxknwl.now.sh`, {
       method: 'POST',
-      body: JSON.stringify({ values: this.state.numbers, operation: this.state.operation }),
+      body: JSON.stringify({ values: numbers, operation }),
       headers: {
         'Accept': 'application/json',
       },
-    })
-      .then(res => res.json())
+    }).then(res => res.json())
+      .catch(err => console.log(err))
     
     this.setState({ response })
   }
   
   
   render() {
-    
-    // const numbers = range(0, this.state.numbers, 1)
     
     const { numbers, current, operation, response } = this.state
     
